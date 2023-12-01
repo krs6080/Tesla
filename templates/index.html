@@ -58,21 +58,21 @@
 
     <form action="/submit" method="post">
         <label for="model">Enter Tesla Model Name:</label>
-        <input type="text" id="model" name="model" required>
+        <select name="model" id="model">
+            {% for model in tesla_models %}
+                <option value="{{model.model}}" > {{model.name}} </option>
+            {% endfor %}
+          </select>
         <input type="submit" value="Search">
     </form>
 
-    <p>
-        {{ data["test"] }}
-    </p>
+    {% if data %}
+                
+        {% if data.get("image_url") %}
+            <img src="{{ data['image_url'] }}" alt="Tesla Model">
+        {% endif %}
 
-    <p>
-        {{ data["data"] }}
-    </p>
-
-    {% if data.get("image_url") %}
-        <img src="{{ data['image_url'] }}" alt="Tesla Model">
     {% endif %}
-
+    
 </body>
 </html>
